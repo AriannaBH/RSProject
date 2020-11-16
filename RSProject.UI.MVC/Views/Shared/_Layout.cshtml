@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="zxx">
 <head>
-    <title>X Gym - Fitness HTML Template</title>
+    <title>KC Softball Academy</title>
     <meta charset="UTF-8">
-    <meta name="description" content="X Gym Fitness HTML Template">
-    <meta name="keywords" content="fitness, html">
+    <meta name="author" content="Arianan B Harrison" />
+    <meta name="description" content="Softball facility for teams to register and reserve practice time.">
+    <meta name="keywords" content="softball, html, reservation, css, jquery">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="~/Content/css/slicknav.min.css" />
     <!-- Main Stylesheets -->
     <link rel="stylesheet" href="~/Content/css/style.css" />
+    <link href="~/Content/css/Custom.css" rel="stylesheet" />
 
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -32,19 +34,18 @@
     </div>
     <!-- Header section -->
     <header class="header-section">
-        <a href="home.html" class="site-logo">
-            <img src="~/Content/img/logo.png" alt="">
+        <a href="@Url.Action("Index", "Home")" class="site-logo">
+            <img src="~/Content/img/kansas-logo.png" alt="">
         </a>
         <ul class="main-menu">
             <li><a class="active" href="@Url.Action("Index", "Home")">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="classes.html">Classes</a></li>
-            <li><a href="blog.html">News</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="@Url.Action("Index", "Reservations")">Reservations</a></li>
+            <li><a href="@Url.Action("Index", "Services")">Services</a></li>
+            <li><a href="@Url.Action("About", "Home")">About Us</a></li>
+            <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
             <li class="header-right">
                 <div class="hr-box">
-                    <img src="~/Content/img/location-icon.png" alt="">
-                    <h6>1525  Amazing Lane, Los Angeles, CA</h6>
+                    <h6 class="myH6"><i class="fa fa-map-marker" aria-hidden="true"></i> 1401 Kansas Avenue Kansas City, MO 64127</h6>
                 </div>
             </li>
         </ul>

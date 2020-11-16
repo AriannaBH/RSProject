@@ -168,10 +168,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerAssetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\UserDetailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +193,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\Custom.css" />
     <Content Include="Content\css\flaticon.css" />
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\owl.carousel.min.css" />
@@ -215,6 +221,7 @@
     <Content Include="Content\img\header-bg\4.jpg" />
     <Content Include="Content\img\header-bg\5.jpg" />
     <Content Include="Content\img\hero-bg.jpg" />
+    <Content Include="Content\img\icon.png" />
     <Content Include="Content\img\icons\1-dark.png" />
     <Content Include="Content\img\icons\1.png" />
     <Content Include="Content\img\icons\2-dark.png" />
@@ -226,8 +233,8 @@
     <Content Include="Content\img\icons\layout.png" />
     <Content Include="Content\img\icons\profile.png" />
     <Content Include="Content\img\icons\search.png" />
-    <Content Include="Content\img\location-icon.png" />
-    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\kansas-logo.png" />
+    <Content Include="Content\img\locationn-icon.png" />
     <Content Include="Content\img\newsletter-bg.jpg" />
     <Content Include="Content\img\pricing-bg.jpg" />
     <Content Include="Content\img\trainers\1.jpg" />
@@ -394,6 +401,31 @@
     <Content Include="Views\Shared\_OriginalLayout.cshtml" />
     <Content Include="_Archive\.DS_Store" />
     <Content Include="_Archive\RS.bak" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\Services\Create.cshtml" />
+    <Content Include="Views\Services\Delete.cshtml" />
+    <Content Include="Views\Services\Details.cshtml" />
+    <Content Include="Views\Services\Edit.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
+    <Content Include="Views\CustomerAssets\Create.cshtml" />
+    <Content Include="Views\CustomerAssets\Delete.cshtml" />
+    <Content Include="Views\CustomerAssets\Details.cshtml" />
+    <Content Include="Views\CustomerAssets\Edit.cshtml" />
+    <Content Include="Views\CustomerAssets\Index.cshtml" />
+    <Content Include="Views\Locations\Create.cshtml" />
+    <Content Include="Views\Locations\Delete.cshtml" />
+    <Content Include="Views\Locations\Details.cshtml" />
+    <Content Include="Views\Locations\Edit.cshtml" />
+    <Content Include="Views\Locations\Index.cshtml" />
+    <Content Include="Views\UserDetails\Create.cshtml" />
+    <Content Include="Views\UserDetails\Delete.cshtml" />
+    <Content Include="Views\UserDetails\Details.cshtml" />
+    <Content Include="Views\UserDetails\Edit.cshtml" />
+    <Content Include="Views\UserDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

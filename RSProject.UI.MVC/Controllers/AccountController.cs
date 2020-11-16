@@ -1,4 +1,5 @@
 ﻿using RSProject.UI.MVC.Models;
+using RSProject.Data.EF;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -153,14 +154,17 @@ namespace RSProject.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //#region Dealing with custom user details
-                    //UserDetail newUserDeets = new UserDetail();
-                    //newUserDeets.UserID = user.Id;
-                    //newUserDeets.FirstName = model.FirstName;
-                    //newUserDeets.LastName = model.LastName;
-                    //FsdpEntities db = new FsdpEntities();
-                    //db.UserDetails.Add(newUserDeets);db.SaveChanges();
-                    //#endregion
+                    #region Dealing with custom user details
+                    UserDetail newUserDeets = new UserDetail();
+                    newUserDeets.UserID = user.Id;
+                    newUserDeets.FirstName = model.FirstName;
+                    newUserDeets.LastName = model.LastName;
+                    newUserDeets.Phone = model.Phone;
+
+                    RSEntities db = new RSEntities();
+                    db.UserDetails.Add(newUserDeets);
+                    db.SaveChanges();
+                    #endregion
 
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);

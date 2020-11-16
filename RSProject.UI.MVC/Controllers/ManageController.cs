@@ -1,4 +1,5 @@
 ﻿using RSProject.UI.MVC.Models;
+using RSProject.Data.EF;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -42,23 +43,41 @@ namespace RSProject.UI.MVC.Controllers
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two factor provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "The phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                //: message == ManageMessageId.SetTwoFactorSuccess ? "Your two factor provider has been set."
+                //: message == ManageMessageId.Error ? "An error has occurred."
+                //: message == ManageMessageId.AddPhoneSuccess ? "The phone number was added."
+                //: message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                //PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                //TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                //Logins = await UserManager.GetLoginsAsync(userId),
+                //BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Index(IndexViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        UserDetail newUserDeets = new UserDetail();
+        //        newUserDeets.Address = model.Address;
+        //        newUserDeets.City = model.City;
+        //        newUserDeets.State = model.State;
+        //        newUserDeets.ZipCode = model.ZipCode;
+
+        //        RSEntities db = new RSEntities();
+        //        db.UserDetails.Add(newUserDeets);
+        //        db.SaveChanges();
+        //    }
+        //}
 
         //
         // GET: /Account/RemoveLogin
@@ -105,27 +124,27 @@ namespace RSProject.UI.MVC.Controllers
 
         //
         // POST: /Account/AddPhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            // Generate the token and send it
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
-            if (UserManager.SmsService != null)
-            {
-                var message = new IdentityMessage
-                {
-                    Destination = model.Number,
-                    Body = "Your security code is: " + code
-                };
-                await UserManager.SmsService.SendAsync(message);
-            }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+        //    // Generate the token and send it
+        //    var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
+        //    if (UserManager.SmsService != null)
+        //    {
+        //        var message = new IdentityMessage
+        //        {
+        //            Destination = model.Number,
+        //            Body = "Your security code is: " + code
+        //        };
+        //        await UserManager.SmsService.SendAsync(message);
+        //    }
+        //    return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+        //}
 
         //
         // POST: /Manage/RememberBrowser
@@ -181,61 +200,61 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         //
-        // GET: /Account/VerifyPhoneNumber
-        [HttpGet]
-        public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
-        {
-            // This code allows you exercise the flow without actually sending codes
-            // For production use please register a SMS provider in IdentityConfig and generate a code here.
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
-            ViewBag.Status = "For DEMO purposes only, the current code is " + code;
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
-        }
+        //// GET: /Account/VerifyPhoneNumber
+        //[HttpGet]
+        //public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
+        //{
+        //    // This code allows you exercise the flow without actually sending codes
+        //    // For production use please register a SMS provider in IdentityConfig and generate a code here.
+        //    var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
+        //    ViewBag.Status = "For DEMO purposes only, the current code is " + code;
+        //    return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+        //}
 
-        //
-        // POST: /Account/VerifyPhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            var userId = User.Identity.GetUserId();
-            var result = await UserManager.ChangePhoneNumberAsync(userId, model.PhoneNumber, model.Code);
-            if (result.Succeeded)
-            {
-                var user = await UserManager.FindByIdAsync(userId);
-                if (user != null)
-                {
-                    await SignInAsync(user, isPersistent: false);
-                }
-                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
-            }
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
-            return View(model);
-        }
+        ////
+        //// POST: /Account/VerifyPhoneNumber
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+        //    var userId = User.Identity.GetUserId();
+        //    var result = await UserManager.ChangePhoneNumberAsync(userId, model.PhoneNumber, model.Code);
+        //    if (result.Succeeded)
+        //    {
+        //        var user = await UserManager.FindByIdAsync(userId);
+        //        if (user != null)
+        //        {
+        //            await SignInAsync(user, isPersistent: false);
+        //        }
+        //        return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
+        //    }
+        //    // If we got this far, something failed, redisplay form
+        //    ModelState.AddModelError("", "Failed to verify phone");
+        //    return View(model);
+        //}
 
-        //
-        // GET: /Account/RemovePhoneNumber
-        [HttpGet]
-        public async Task<ActionResult> RemovePhoneNumber()
-        {
-            var userId = User.Identity.GetUserId();
-            var result = await UserManager.SetPhoneNumberAsync(userId, null);
-            if (!result.Succeeded)
-            {
-                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
-            }
-            var user = await UserManager.FindByIdAsync(userId);
-            if (user != null)
-            {
-                await SignInAsync(user, isPersistent: false);
-            }
-            return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
-        }
+        ////
+        //// GET: /Account/RemovePhoneNumber
+        //[HttpGet]
+        //public async Task<ActionResult> RemovePhoneNumber()
+        //{
+        //    var userId = User.Identity.GetUserId();
+        //    var result = await UserManager.SetPhoneNumberAsync(userId, null);
+        //    if (!result.Succeeded)
+        //    {
+        //        return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+        //    }
+        //    var user = await UserManager.FindByIdAsync(userId);
+        //    if (user != null)
+        //    {
+        //        await SignInAsync(user, isPersistent: false);
+        //    }
+        //    return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
+        //}
 
         //
         // GET: /Manage/ChangePassword

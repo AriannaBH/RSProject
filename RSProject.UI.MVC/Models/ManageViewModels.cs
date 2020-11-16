@@ -9,9 +9,22 @@ namespace RSProject.UI.MVC.Models
     {
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
-        public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public string Phone { get; set; }
+
+        [StringLength(100)]
+        public string Address { get; set; }
+
+        [StringLength(100)]
+        public string City { get; set; }
+
+        [StringLength(2)]
+        public string State { get; set; }
+
+        [Display(Name = "Zip Code")]
+        [StringLength(5)]
+        public string ZipCode { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -59,25 +72,25 @@ namespace RSProject.UI.MVC.Models
     }
 
 
-    public class AddPhoneNumberViewModel
-    {
-        [Required]
-        [Phone]
-        [Display(Name = "Phone Number")]
-        public string Number { get; set; }
-    }
+    //public class AddPhoneNumberViewModel
+    //{
+    //    [Required]
+    //    [Phone]
+    //    [Display(Name = "Phone Number")]
+    //    public string Number { get; set; }
+    //}
 
-    public class VerifyPhoneNumberViewModel
-    {
-        [Required]
-        [Display(Name = "Code")]
-        public string Code { get; set; }
+    //public class VerifyPhoneNumberViewModel
+    //{
+    //    [Required]
+    //    [Display(Name = "Code")]
+    //    public string Code { get; set; }
 
-        [Required]
-        [Phone]
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
-    }
+    //    [Required]
+    //    [Phone]
+    //    [Display(Name = "Phone Number")]
+    //    public string PhoneNumber { get; set; }
+    //}
 
     public class ConfigureTwoFactorViewModel
     {
