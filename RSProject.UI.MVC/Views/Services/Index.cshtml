@@ -1,45 +1,74 @@
 ﻿@model IEnumerable<RSProject.Data.EF.Service>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Our Services";
 }
 
-<h2>Index</h2>
+@* Format into tile view and add images!, anyone can view this page *@
+@* let them click the tile to reserve that they jsut need to dill in date and time, etc *@
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
+<header class="myMasthead">
+    <!-- Services-->
+    <section class="page-section" id="services">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase mt-5 text-center">@ViewBag.Title</h2>
+                <h3 class="section-subheading text-muted">All it takes is all you got.</h3>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ServiceID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ServiceID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ServiceID })
-        </td>
-    </tr>
-}
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "Services")">Create New Service</a>
 
-</table>
+                }
+
+
+                <br />
+            </div>
+
+            <div class="row text-center">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-4">
+                        <div class="card-deck m-3 text-center myCard">
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-header">$@Html.DisplayFor(modelItem => item.Price)</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+
+                                    @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+                                    {
+                                        <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Index", "Reservations")">Reserve</a>
+                                    }
+
+                                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <p class="myLink">
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ServiceID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.ServiceID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.ServiceID })
+                                        </p>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+
+        @if (!User.IsInRole("Admin") && !User.IsInRole("Customer") && !User.IsInRole("Employee"))
+        {
+            <div class="text-center">
+                <a class="btn btn-primary btn-xl text-uppercase mb-3 mt-5" href="@Url.Action("Register", "Account")">Become a member</a>
+                <h3 class="section-subheading text-muted">and take advantage of these awesome prices and opportunities for your team!</h3>
+            </div>
+        }
+
+    </section>
+
+</header>

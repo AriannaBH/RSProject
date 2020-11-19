@@ -10,6 +10,7 @@ using RSProject.Data.EF;
 
 namespace RSProject.UI.MVC.Controllers
 {
+    
     public class ServicesController : Controller
     {
         private RSEntities db = new RSEntities();
@@ -21,6 +22,7 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: Services/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: Services/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace RSProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "ServiceID,Name,Description,Price")] Service service)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: Services/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace RSProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "ServiceID,Name,Description,Price")] Service service)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: Services/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace RSProject.UI.MVC.Controllers
         // POST: Services/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Service service = db.Services.Find(id);

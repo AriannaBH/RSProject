@@ -44,7 +44,7 @@ namespace RSProject.Data.EF
 
         [Required(ErrorMessage = "This field is required!")]
         [Display(Name = "Date Added")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true, NullDisplayText = "[-Date Not Provided-]")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true, NullDisplayText = "[-Date Not Provided-]")]
         public System.DateTime DateAdded { get; set; }
     }
 
@@ -113,7 +113,7 @@ namespace RSProject.Data.EF
 
         [Required(ErrorMessage = "This field is required!")]
         [Display(Name = "Reservation Date")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true, NullDisplayText = "[-Date Not Provided-]")]
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true, NullDisplayText = "[-Date Not Provided-]")]
         public System.DateTime ReservationDate { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]

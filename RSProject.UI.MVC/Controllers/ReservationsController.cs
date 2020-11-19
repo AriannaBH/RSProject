@@ -10,6 +10,7 @@ using RSProject.Data.EF;
 
 namespace RSProject.UI.MVC.Controllers
 {
+    [Authorize]
     public class ReservationsController : Controller
     {
         private RSEntities db = new RSEntities();
@@ -37,6 +38,7 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: Reservations/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.CustomerAssetID = new SelectList(db.CustomerAssets, "CustomerAssetID", "AssetName");
@@ -50,6 +52,7 @@ namespace RSProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "ReservationID,CustomerAssetID,LocationID,ServiceID,ReservationDate,ReservationTime")] Reservation reservation)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,7 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: Reservations/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,6 +92,7 @@ namespace RSProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "ReservationID,CustomerAssetID,LocationID,ServiceID,ReservationDate,ReservationTime")] Reservation reservation)
         {
             if (ModelState.IsValid)
@@ -103,6 +108,7 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: Reservations/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,6 +126,7 @@ namespace RSProject.UI.MVC.Controllers
         // POST: Reservations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Reservation reservation = db.Reservations.Find(id);

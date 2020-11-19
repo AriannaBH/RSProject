@@ -1,57 +1,65 @@
 ﻿@model IEnumerable<RSProject.Data.EF.Reservation>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reservations";
 }
 
-<h2>Index</h2>
+@* FIgure a way to display users reservations only to them and none if they have none. EMployee and admin can view all. *@
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ReservationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReservationTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerAsset.AssetName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location.LocationName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Service.Name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReservationDate)
-        </td>
-        <td>
-            @*@Html.DisplayFor(modelItem => item.ReservationTime)*@
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomerAsset.AssetName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location.LocationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Service.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ReservationID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ReservationID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ReservationID })
-        </td>
-    </tr>
+<h2 class="text-center mt-3">@ViewBag.Title</h2>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
+    <table class="table mt-3">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservationTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerAsset.AssetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location.LocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Service.Name)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReservationDate)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ReservationTime)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerAsset.AssetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Service.Name)
+            </td>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ReservationID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })
+                </td>
+            }
+            </tr>
+        }
+
+    </table>

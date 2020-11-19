@@ -1,12 +1,115 @@
-﻿.header-right .hr-box {
-    background: #233ede;
+﻿#mainNav .navbar-brand img {
+    height: 3em;
+    padding-right: 2em;
 }
 
-.myH6 {
+#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover, a {
+    color: #2508bf;
+}
+
+#mainNav .navbar-toggler {
+    background-color: #2508bf;
+}
+
+.btn-primary {
+    background-color: #2508bf;
+    border-color: #2508bf;
+}
+
+a:hover {
+    color: gray;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: #2508bf;
+    border-color: white;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+    background-color: white;
+    border-color: white;
+    color: #2508bf;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    background-color: white;
+    border-color: white;
+    color: #2508bf;
+    box-shadow: 0 0 0 0.2rem rgba(9, 78, 188, 0.5);
+}
+
+header.masthead {
+    background-image: url(../assets/img/softballMain.jpeg)
+}
+
+::selection {
+    background: #2508bf;
+}
+
+.mySpam {
+    /*color: white;*/
+}
+
+header.masthead {
+    /*color: #2508bf;*/
+}
+
+.dropdown-item.active, .dropdown-item:active, .timeline > li .timeline-image {
+    background-color: #2508bf;
+}
+
+.myPartial {
+    padding: 0;
+}
+
+.myFormLink {
+    color: #2508bf !important;
+}
+
+    .myFormLink:hover {
+        color: black !important;
+    }
+
+.body-content {
+    padding-top: 36px; /* choose whatever you want here */
+}
+
+.myContainer {
+    padding-top: 17rem;
+    padding-bottom: 12.5rem;
+}
+
+.myMasthead {
+    background-image: url(../assets/img/softballPic.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+}
+
+h2, h4, .myBody, .text-muted {
+    color: white !important;
+}
+
+.myA {
     color: white;
 }
 
-.myLocation{
-    width:auto;
-    height: 200px;
+    .myA:hover {
+        color: #2508bf;
+    }
+
+.myCard {
+    margin-right: auto;
+    max-width: 18rem;
+}
+
+.myLink {
+    color: white;
+
+}
+
+.myLink:hover {
+    color: black;
 }

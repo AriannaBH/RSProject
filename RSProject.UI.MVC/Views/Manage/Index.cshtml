@@ -3,28 +3,34 @@
     ViewBag.Title = "Manage your account";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div class="">
-    <div class="col-md-10 text-center offset-1">
-        <p>
-            @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") 
-                : Html.ActionLink("Pick a password", "SetPassword"))
-        </p>
-        <p>
-            @*Phone Number: @Html.DisplayFor(m => m.Phone)*@
-            @*@if (Model.Phone != null)
-            {
-                @Html.ActionLink("Change", "AddPhoneNumber")
-                @: &nbsp;|&nbsp;
-                @Html.ActionLink("Remove", "RemovePhoneNumber")
-            }
-            else
-            {
-                @Html.ActionLink("Add", "AddPhoneNumber")
-            }
-            ]*@
-        </p>
-       
+
+
+<header class="myMasthead">
+    <div class="myContainer">
+        <h2 class="text-center">@ViewBag.Title</h2>
+        <p class="text-success">@ViewBag.StatusMessage</p>
+        <div class="">
+            <div class="col-md-10 text-center offset-1">
+                <p>
+                    @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword")
+                                                                                : Html.ActionLink("Pick a password", "SetPassword"))
+                </p>
+                <p>
+                    @*Phone Number: @Html.DisplayFor(m => m.Phone)*@
+                    @*@if (Model.Phone != null)
+                        {
+                            @Html.ActionLink("Change", "AddPhoneNumber")
+                            @: &nbsp;|&nbsp;
+                            @Html.ActionLink("Remove", "RemovePhoneNumber")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Add", "AddPhoneNumber")
+                        }
+                        ]*@
+                </p>
+
+            </div>
+        </div>
     </div>
-</div>
+</header>
