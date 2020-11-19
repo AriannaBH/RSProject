@@ -40,7 +40,11 @@ a:hover {
 }
 
 header.masthead {
-    background-image: url(../assets/img/softballMain.jpeg)
+    background-image: url(../assets/img/softballMain.jpeg);
+}
+
+.container {
+    opacity: 1;
 }
 
 ::selection {
@@ -48,14 +52,14 @@ header.masthead {
 }
 
 .mySpam {
-    /*color: white;*/
+    color: #2508bf;
 }
 
 header.masthead {
     /*color: #2508bf;*/
 }
 
-.dropdown-item.active, .dropdown-item:active, .timeline > li .timeline-image {
+.dropdown-item.active, .dropdown-item:active, .timeline > li .timeline-image, #portfolio .portfolio-item .portfolio-caption {
     background-color: #2508bf;
 }
 
@@ -105,11 +109,14 @@ h2, h4, .myBody, .text-muted {
     max-width: 18rem;
 }
 
-.myLink {
+.myLink, .myActionLink a, #portfolio .portfolio-item .portfolio-caption {
     color: white;
-
 }
 
-.myLink:hover {
-    color: black;
+    .myLink:hover,  .myActionLink:hover a {
+        color: black;
+    }
+
+.myLinkTwo a {
+    color: white;
 }

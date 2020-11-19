@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using System.Net;
+using System.Net.Mail;
+using RSProject.UI.MVC.Models;
 
 namespace RSProject.UI.MVC.Controllers
 {
@@ -21,10 +25,51 @@ namespace RSProject.UI.MVC.Controllers
         [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
-        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(ContactViewModel cvm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(cvm);
+            }
+
+            string message = $"You have received an email from {cvm.Name} with a subject {cvm.Subject}. Please respond to {cvm.Email} with your response to the following message: <br/>{cvm.Message}";
+
+            MailMessage mm = new MailMessage(
+                //FROM
+                "",
+                //TO 
+                "",
+                //SUBJECT
+                cvm.Subject,
+                //BODY
+                message
+                );
+
+            mm.IsBodyHtml = true;
+            mm.Priority = MailPriority.High;
+            mm.ReplyToList.Add(cvm.Email);
+
+            SmtpClient client = new SmtpClient("mail.");
+            client.Credentials = new NetworkCredential("", "");
+            client.Port = 8889;
+
+            try
+            {
+                client.Send(mm);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.CustomerMessage = $"Sorry your request could not be completed at this time. Please try again later.<br/>Error Message:<br/>{ex.StackTrace}";
+                return View(cvm);
+            }
+
+            return View("EmailConfirmation", cvm);
+        }
     }
 }

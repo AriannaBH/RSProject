@@ -6,60 +6,72 @@
 
 @* FIgure a way to display users reservations only to them and none if they have none. EMployee and admin can view all. *@
 
-<h2 class="text-center mt-3">@ViewBag.Title</h2>
-@if (Request.IsAuthenticated && User.IsInRole("Admin"))
-{
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
-    <table class="table mt-3">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ReservationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReservationTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerAsset.AssetName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location.LocationName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Service.Name)
-            </th>
-            <th></th>
-        </tr>
+<header class="myMasthead">
+    <section class="page-section" id="">
+        <div class="container">
 
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReservationDate)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.ReservationTime)*@
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerAsset.AssetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location.LocationName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Service.Name)
-            </td>
-            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ReservationID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })
-                </td>
-            }
-            </tr>
-        }
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
+                <h3 class="section-subheading text-muted"></h3>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "Reservations")">Create New Reservation</a>
 
-    </table>
+                }
+
+                <br />
+
+            </div>
+            <table class="table mt-3">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReservationDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReservationTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerAsset.AssetName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Location.LocationName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Service.Name)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReservationDate)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.ReservationTime)*@
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerAsset.AssetName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location.LocationName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Service.Name)
+                        </td>
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ReservationID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </section>
+</header>

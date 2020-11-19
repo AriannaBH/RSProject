@@ -6,31 +6,33 @@
 
 
 <header class="myMasthead">
-    <div class="myContainer">
-        <h2 class="text-center">@ViewBag.Title</h2>
-        <p class="text-success">@ViewBag.StatusMessage</p>
-        <div class="">
-            <div class="col-md-10 text-center offset-1">
-                <p>
-                    @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword")
-                                                                                : Html.ActionLink("Pick a password", "SetPassword"))
-                </p>
-                <p>
-                    @*Phone Number: @Html.DisplayFor(m => m.Phone)*@
-                    @*@if (Model.Phone != null)
-                        {
-                            @Html.ActionLink("Change", "AddPhoneNumber")
-                            @: &nbsp;|&nbsp;
-                            @Html.ActionLink("Remove", "RemovePhoneNumber")
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Add", "AddPhoneNumber")
-                        }
-                        ]*@
-                </p>
+    <section class="page-section" id="">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
+                <h3 class="section-subheading text-muted">@ViewBag.StatusMessage</h3>
 
+
+                <br />
+                <p class="myLinkTwo">
+                    @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword")
+                                                                                                                        : Html.ActionLink("Pick a password", "SetPassword"))
+                </p>
             </div>
+
         </div>
-    </div>
+        @*Phone Number: @Html.DisplayFor(m => m.Phone)*@
+        @*@if (Model.Phone != null)
+            {
+                @Html.ActionLink("Change", "AddPhoneNumber")
+                @: &nbsp;|&nbsp;
+                @Html.ActionLink("Remove", "RemovePhoneNumber")
+            }
+            else
+            {
+                @Html.ActionLink("Add", "AddPhoneNumber")
+            }
+            ]*@
+
+    </section>
 </header>

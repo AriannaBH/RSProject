@@ -45,8 +45,7 @@
                                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                                     {
                                         <p class="myLink">
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.ServiceID }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.ServiceID }) |
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ServiceID }) <spam class="mySpam">|</spam>
                                             @Html.ActionLink("Delete", "Delete", new { id = item.ServiceID })
                                         </p>
                                     }

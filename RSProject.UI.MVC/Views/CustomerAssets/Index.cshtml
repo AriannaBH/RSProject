@@ -1,63 +1,79 @@
 ﻿@model IEnumerable<RSProject.Data.EF.CustomerAsset>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Customer Assets";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AssetName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AssetPhoto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SpecialNotes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </th>
-        <th></th>
-    </tr>
+<header class="myMasthead">
+    <section class="page-section" id="">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "CustomerAssets")">
+                        Create New Asset
+                    </a>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssetName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssetPhoto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SpecialNotes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateAdded)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerAssetID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CustomerAssetID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CustomerAssetID })
-        </td>
-    </tr>
-}
+                }
 
-</table>
+                <br />
+
+            </div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AssetName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AssetPhoto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SpecialNotes)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateAdded)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssetName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AssetPhoto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SpecialNotes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateAdded)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CustomerAssetID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.CustomerAssetID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CustomerAssetID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </section>
+</header>
