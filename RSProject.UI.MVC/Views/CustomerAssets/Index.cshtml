@@ -1,79 +1,66 @@
 ﻿@model IEnumerable<RSProject.Data.EF.CustomerAsset>
+    @using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Customer Assets";
+    ViewBag.Subtitle = "Team";
 }
 
 
 <header class="myMasthead">
-    <section class="page-section" id="">
+    <section class="page-section" id="portfolio">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
+                @if (User.IsInRole("Admin"))
+                {
+                    <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
+                }
+                else
+                {
+                    <h2 class="section-heading text-uppercase mt-5">@ViewBag.Subtitle</h2>
+                }
+
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
                     <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "CustomerAssets")">
                         Create New Asset
                     </a>
-
+                }
+                
+                @if(Request.IsAuthenticated && User.IsInRole("Customer"))
+                {
+                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "CustomerAssets")">
+                        Create New Team
+                    </a>
                 }
 
                 <br />
 
             </div>
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.AssetName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.AssetPhoto)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SpecialNotes)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.IsActive)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DateAdded)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-                    </th>
-                    <th></th>
-                </tr>
-
+            <div class="row">
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AssetName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AssetPhoto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SpecialNotes)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IsActive)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateAdded)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.CustomerAssetID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.CustomerAssetID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CustomerAssetID })
-                        </td>
-                    </tr>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="portfolio-item">
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">@Html.DisplayFor(modelItem => item.AssetName)</div>
+                                
+                                
+
+                                @if (Request.IsAuthenticated )
+                                {
+                                <div class="myLinkTwo">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.CustomerAssetID }) | @Html.ActionLink("Details", "Details", new { id = item.CustomerAssetID })
+                                    |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.CustomerAssetID })
+                                </div>
+
+                                 }
+                            </div>
+                        </div>
+                    </div>
                 }
 
-            </table>
-        </div>
+            </div>
     </section>
 </header>

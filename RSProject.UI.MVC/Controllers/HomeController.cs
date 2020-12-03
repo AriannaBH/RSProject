@@ -23,6 +23,12 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         [HttpGet]
+        public ActionResult Project()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult Contact()
         {
 
@@ -55,7 +61,7 @@ namespace RSProject.UI.MVC.Controllers
             mm.Priority = MailPriority.High;
             mm.ReplyToList.Add(cvm.Email);
 
-            SmtpClient client = new SmtpClient("mail.");
+            SmtpClient client = new SmtpClient("");
             client.Credentials = new NetworkCredential("", "");
             client.Port = 8889;
 

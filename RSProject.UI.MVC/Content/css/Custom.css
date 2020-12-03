@@ -16,6 +16,12 @@
     border-color: #2508bf;
 }
 
+.myBtn {
+    background-color: white;
+    border-color: white;
+    color: #2508bf;
+}
+
 a:hover {
     color: gray;
 }
@@ -24,6 +30,12 @@ a:hover {
     background-color: white;
     color: #2508bf;
     border-color: white;
+}
+
+.myBtn:hover {
+    background-color: #2508bf;
+    border-color: white;
+    color: white;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
@@ -40,7 +52,7 @@ a:hover {
 }
 
 header.masthead {
-    background-image: url(../assets/img/softballMain.jpeg);
+    background-image: url(../assets/img/softballgirl.jpeg);
 }
 
 .container {
@@ -85,7 +97,7 @@ header.masthead {
 }
 
 .myMasthead {
-    background-image: url(../assets/img/softballPic.jpeg);
+    background-image: url(../assets/img/fieldpic.jpg);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center center;
@@ -120,3 +132,11 @@ h2, h4, .myBody, .text-muted {
 .myLinkTwo a {
     color: white;
 }
+
+.myBtn2 a {
+    color: white;
+}
+
+    .myBtn2 a:hover {
+        color: #2508bf;
+    }

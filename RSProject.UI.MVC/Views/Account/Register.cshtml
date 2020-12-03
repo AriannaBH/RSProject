@@ -7,13 +7,13 @@
 <header class="myMasthead">
     <section class="page-section" id="">
         <div class="container">
-            <h2 class="mt-5 text-center">@ViewBag.Title</h2>
+            <h2 class="section-heading text-uppercase mt-5 text-center">@ViewBag.Title</h2>
 
             @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4 class="text-center">and become a member</h4>
-                <hr />
+                <h3 class="text-center section-subheading text-muted">and become a member</h3>
+               
                 @Html.ValidationSummary("", new { @class = "text-danger" })
 
                 <div class="form-group">

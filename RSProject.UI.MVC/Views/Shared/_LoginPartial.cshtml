@@ -12,6 +12,11 @@
             </a>
             <spam class="dropdown-menu nav-item" aria-labelledby="navbardropdown">
                 <a class="dropdown-item">@Html.ActionLink("Manage Account", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "dropdown-item" })</a>
+                @if (User.IsInRole("Customer"))
+                {
+               
+                <a class="dropdown-item">@Html.ActionLink("Team", "Index", "CustomerAssets", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })</a>
+                }
                 <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log Off</a>
             </spam>
         </li>

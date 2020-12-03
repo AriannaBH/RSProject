@@ -1,64 +1,73 @@
 ﻿@model RSProject.Data.EF.Reservation
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Cancel";
 }
 
-<h2>Delete</h2>
+<header class="myMasthead">
+    <section class="page-section">
+        <div class="container">
+            <div class="form-horizontal">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title?</h2>
+                    <h3 class="section-subheading text-muted">Are you sure you want to cancel @Html.DisplayFor(model => model.CustomerAsset.AssetName)'s Reservation?</h3>
+                    <br />
+                </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Reservation</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ReservationDate)
-        </dt>
+                <dl class="col-md-10 myBody offset-1 text-center">
+                    <dt>
+                        Reservation Date
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReservationDate)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.ReservationDate)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReservationTime)
-        </dt>
+                    <dt>
+                        Reservation Time
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReservationTime)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.ReservationTime)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerAsset.AssetName)
-        </dt>
+                    <dt>
+                        Location
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CustomerAsset.AssetName)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Location.City), @Html.DisplayFor(model => model.Location.State)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Location.LocationName)
-        </dt>
+                    <dt>
+                        Team Name
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Location.LocationName)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.CustomerAsset.AssetName)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Service.Name)
-        </dt>
+                    <dt>
+                        Service
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Service.Name)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.Service.Name)
+                    </dd>
+                </dl>
+            </div>
+            <br />
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-    </dl>
+                <div class="col-md-10 offset-1 text-center">
+                    <input type="submit" value="Cancel" class="btn btn-primary btn-xl text-uppercase" />
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                </div>
+                <br />  
+                <div class="myLinkTwo offset-1"> @Html.ActionLink("Back to List", "Index")</div>
+            }
         </div>
-    }
-</div>
+    </section>
+</header>

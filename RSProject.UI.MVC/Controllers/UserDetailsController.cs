@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RSProject.Data.EF;
+using Microsoft.AspNet.Identity;
 
 namespace RSProject.UI.MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UserDetailsController : Controller
     {
         private RSEntities db = new RSEntities();
@@ -17,7 +19,9 @@ namespace RSProject.UI.MVC.Controllers
         // GET: UserDetails
         public ActionResult Index()
         {
-            return View(db.UserDetails.ToList());
+            var userDetails = db.UserDetails.Include(i => i.CustomerAssets).Include(i => i.AspNetUser);
+            return View(userDetails.ToList());
+
         }
 
         // GET: UserDetails/Details/5
@@ -36,9 +40,16 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: UserDetails/Create
+        [Authorize]
         public ActionResult Create()
         {
+            ViewBag.CustomerAssetID = new SelectList(db.UserDetails, "UserID", "Email");
+            ViewBag.LocationID = new SelectList(db.CustomerAssets, "OwnerID", "Email");
+            ViewBag.ServiceID = new SelectList(db.AspNetUsers, "Id", "Email");
+
             return View();
+
+
         }
 
         // POST: UserDetails/Create
@@ -46,10 +57,12 @@ namespace RSProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,FirstName,LastName,Phone,Email,Address,City,State,ZipCode")] UserDetail userDetail)
+        [Authorize]
+        public ActionResult Create([Bind(Include = "UserID,FirstName,LastName,Phone,Email")] UserDetail userDetail)
         {
             if (ModelState.IsValid)
             {
+
                 db.UserDetails.Add(userDetail);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +91,7 @@ namespace RSProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,Phone,Email,Address,City,State,ZipCode")] UserDetail userDetail)
+        public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,Phone,Email")] UserDetail userDetail)
         {
             if (ModelState.IsValid)
             {

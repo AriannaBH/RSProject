@@ -2,14 +2,22 @@
 
 @{
     ViewBag.Title = "User Details";
+    ViewBag.SubTitle = "Coach Details";
 }
 
 
 <header class="myMasthead">
-    <section class="page-section" id="">
+    <section class="page-section" id="portfolio">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
+                }
+                @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+                {
+                    <h2 class="section-heading text-uppercase mt-5">@ViewBag.SubTitle</h2>
+                }
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
                     <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "UserDetails")">
@@ -17,75 +25,43 @@
                     </a>
 
                 }
+                @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+                {
+                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "UserDetails")">
+                        Create New Coach
+                    </a>
+                }
 
                 <br />
 
             </div>
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.FirstName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.LastName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Phone)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Address)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.City)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.State)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ZipCode)
-                    </th>
-                    <th></th>
-                </tr>
+            <div class="row">
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Phone)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.City)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.State)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ZipCode)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
-                        </td>
-                    </tr>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="portfolio-item">
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">
+                                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                                </div>
+                                <div class="portfolio-caption-subheading text-muted myLinkTwo"> @Html.DisplayFor(modelItem => item.Email)</div>
+                                <div class="portfolio-caption-subheading text-muted">
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </div>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    <div class="myLinkTwo">
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 }
-
-            </table>
+            </div>
         </div>
-        </section>
+    </section>
 </header>
+

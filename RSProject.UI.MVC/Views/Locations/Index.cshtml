@@ -16,6 +16,11 @@
                     <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "Locations")">Create New Location</a>
 
                 }
+                @if (Request.IsAuthenticated && User.IsInRole("Customer"))
+                {
+                    <br />
+                    <a class="btn btn-xl text-uppercase mb-5 myBtn" href="@Url.Action("Create", "Reservations")">Reserve Now</a>
+                }
 
                 <br />
 

@@ -6,7 +6,7 @@
 
 
 <header class="myMasthead">
-    <section class="page-section" id="">
+    <section class="page-section" id="portfolio">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
@@ -21,31 +21,28 @@
                 <br />
 
             </div>
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UserName)
-                    </th>
-                    <th>
-
-                    </th>
-                </tr>
-
+            <div class="row">
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                        </td>
-                    </tr>
-                }
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="portfolio-item">
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-subheading">@Html.DisplayFor(modelItem => item.UserName)</div>
+                               
 
-            </table>
+                                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                {
+                                <div class="myLinkTwo">
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
         </div>
     </section>
 </header>

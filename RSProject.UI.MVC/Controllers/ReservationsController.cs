@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RSProject.Data.EF;
+using Microsoft.AspNet.Identity;
 
 namespace RSProject.UI.MVC.Controllers
 {
@@ -18,11 +19,22 @@ namespace RSProject.UI.MVC.Controllers
         // GET: Reservations
         public ActionResult Index()
         {
-            var reservations = db.Reservations.Include(r => r.CustomerAsset).Include(r => r.Location).Include(r => r.Service);
-            return View(reservations.ToList());
+            if (User.IsInRole("Customer"))
+            {
+                string currentUser = User.Identity.GetUserId();
+                var reservations = db.Reservations.Where(r => r.CustomerAsset.OwnerID == currentUser).Include(i => i.CustomerAsset).Include(i => i.Location).Include(r => r.Service);
+                return View(reservations.ToList());
+            }
+            else
+            {
+
+                var reservations = db.Reservations.Include(r => r.CustomerAsset).Include(r => r.Location).Include(r => r.Service);
+                return View(reservations.ToList());
+            }
         }
 
         // GET: Reservations/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,13 +50,30 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         // GET: Reservations/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Customer")]
         public ActionResult Create()
         {
-            ViewBag.CustomerAssetID = new SelectList(db.CustomerAssets, "CustomerAssetID", "AssetName");
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
-            ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");
-            return View();
+            if (User.IsInRole("Customer"))
+            {
+                string currentUser = User.Identity.GetUserId();
+
+                ViewBag.CustomerAssetID = new SelectList(db.CustomerAssets.Where(c => c.OwnerID == currentUser), "CustomerAssetID", "AssetName");
+                ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "City");
+                ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");
+
+                return View();
+            }
+            else
+            {
+
+
+                ViewBag.CustomerAssetID = new SelectList(db.CustomerAssets, "CustomerAssetID", "AssetName");
+                ViewBag.LocationID = new SelectList(db.Locations.OrderBy(o => o.LocationName), "LocationID", "City");
+                ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");
+
+                return View();
+            }
+
         }
 
         // POST: Reservations/Create
@@ -52,18 +81,40 @@ namespace RSProject.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Customer")]
         public ActionResult Create([Bind(Include = "ReservationID,CustomerAssetID,LocationID,ServiceID,ReservationDate,ReservationTime")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
-                db.Reservations.Add(reservation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (User.IsInRole("Customer"))
+                {
+                    int limit = db.Locations.Where(l => l.LocationID == reservation.LocationID).Select(l => l.ReservationLimit).Single();
+
+                    int numberOfRes = db.Reservations.Where(r => r.LocationID == reservation.LocationID && r.ReservationDate == reservation.ReservationDate).Count();
+
+                    if (numberOfRes < limit)
+                    {
+                        db.Reservations.Add(reservation);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.LimitFull = $"Sorry reservation full, please choose another date or location!";
+                        // return View(reservation);
+                    }
+                }
+                else
+                {
+                    db.Reservations.Add(reservation);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
             }
 
             ViewBag.CustomerAssetID = new SelectList(db.CustomerAssets, "CustomerAssetID", "AssetName", reservation.CustomerAssetID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", reservation.LocationID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "City", reservation.LocationID);
             ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", reservation.ServiceID);
             return View(reservation);
         }
@@ -82,7 +133,7 @@ namespace RSProject.UI.MVC.Controllers
                 return HttpNotFound();
             }
             ViewBag.CustomerAssetID = new SelectList(db.CustomerAssets, "CustomerAssetID", "AssetName", reservation.CustomerAssetID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", reservation.LocationID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "City", reservation.LocationID);
             ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", reservation.ServiceID);
             return View(reservation);
         }
@@ -102,7 +153,7 @@ namespace RSProject.UI.MVC.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CustomerAssetID = new SelectList(db.CustomerAssets, "CustomerAssetID", "AssetName", reservation.CustomerAssetID);
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", reservation.LocationID);
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "City", reservation.LocationID);
             ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name", reservation.ServiceID);
             return View(reservation);
         }

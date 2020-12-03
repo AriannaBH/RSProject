@@ -6,7 +6,7 @@
 <header class="myMasthead">
     <section class="page-section" id="loginForm">
         <div class="container">
-            <h2 class="mt-5 text-center">@ViewBag.Title</h2>
+            <h2 class="section-heading text-uppercase mt-5 text-center">@ViewBag.Title</h2>
             <div class="row">
                 <div class="col-md-10 offset-1">
                         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

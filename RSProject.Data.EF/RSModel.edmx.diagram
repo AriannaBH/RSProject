@@ -14,6 +14,9 @@
         <AssociationConnector Association="RSModel.FK_Reservations_CustomerAssets" ManuallyRouted="false" />
         <AssociationConnector Association="RSModel.FK_Reservations_Locations" ManuallyRouted="false" />
         <AssociationConnector Association="RSModel.FK_Reservations_Services" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RSModel.AspNetUser" Width="1.5" PointX="3.625" PointY="4.375" />
+        <AssociationConnector Association="RSModel.FK_UserDetails_AspNetUsers" />
+        <AssociationConnector Association="RSModel.FK_CustomerAssets_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

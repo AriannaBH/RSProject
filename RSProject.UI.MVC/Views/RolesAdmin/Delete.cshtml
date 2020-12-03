@@ -3,30 +3,29 @@
 @{
     ViewBag.Title = "Delete";
 }
+<header class="myMasthead">
+    <section class="page-section">
+        <div class="container">
+            <div class="form-horizontal">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title?</h2>
+                    <h3 class="section-subheading text-muted">Are you sure you want to delete the role of <strong>@Html.DisplayFor(model => model.Name)</strong>?</h3>
+                    <br />
+                </div>
 
-<h2>Delete.</h2>
 
-<h3>Are you sure you want to delete this Role? </h3>
-<p>Deleting this Role will remove all users from this role. It will not delete the users.</p>
-<div>
-    <h4>Role.</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+                    <div class="col-md-10 offset-1 text-center">
+                        <input type="submit" value="Delete" class="btn btn-primary btn-xl text-uppercase" />
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                    </div>
+                    <br />
+                    <div class="myLinkTwo offset-1"> @Html.ActionLink("Back to List", "Index")</div>
+                }
+            </div>
         </div>
-    }
-</div>
+    </section>
+</header>

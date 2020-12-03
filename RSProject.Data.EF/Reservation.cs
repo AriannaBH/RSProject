@@ -19,7 +19,7 @@ namespace RSProject.Data.EF
         public int LocationID { get; set; }
         public int ServiceID { get; set; }
         public System.DateTime ReservationDate { get; set; }
-        public System.TimeSpan ReservationTime { get; set; }
+        public Nullable<System.DateTime> ReservationTime { get; set; }
     
         public virtual CustomerAsset CustomerAsset { get; set; }
         public virtual Location Location { get; set; }

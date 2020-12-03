@@ -10,7 +10,7 @@ namespace RSProject.Data.EF
     [MetadataType(typeof(CustomerAssetMetadata))]
     public partial class CustomerAsset
     {
-
+        
     }
 
     public class CustomerAssetMetadata
@@ -20,16 +20,17 @@ namespace RSProject.Data.EF
         public int CustomerAssetID { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]
-        [Display(Name = "Asset Name")]
+        [Display(Name = "Team Name")]
         [StringLength(50, ErrorMessage = "50 Character Max!")]
         public string AssetName { get; set; }
 
+        //FK field
         [Required(ErrorMessage = "This field is required!")]
-        [StringLength(128, ErrorMessage = "128 Character Max!")]
-        [Display(Name = "Owner ID")]
+        //[StringLength(128, ErrorMessage = "128 Character Max!")]
+        [Display(Name = "Coach Name")]
         public string OwnerID { get; set; }
 
-        [Display(Name = "Asset Photo")]
+        [Display(Name = "Team Photo")]
         [StringLength(50, ErrorMessage = "50 Character Max!")]
         public string AssetPhoto { get; set; }
 
@@ -116,11 +117,9 @@ namespace RSProject.Data.EF
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true, NullDisplayText = "[-Date Not Provided-]")]
         public System.DateTime ReservationDate { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
         [Display(Name = "Reservation Time")]
-        [StringLength(7, ErrorMessage = "7 Character Max!")]
-        [DisplayFormat(DataFormatString = "{0:hh:mm}", ApplyFormatInEditMode = true)]
-        public System.TimeSpan ReservationTime { get; set; }
+        [DataType(DataType.Time)]
+        public System.DateTime ReservationTime { get; set; }
     }
 
     [MetadataType(typeof(ServiceMetadata))]
@@ -150,7 +149,11 @@ namespace RSProject.Data.EF
     [MetadataType(typeof(UserDetailMetadata))]
     public partial class UserDetail
     {
-
+        [Display(Name ="Coach")]
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
     }
 
     public class UserDetailMetadata
@@ -173,25 +176,12 @@ namespace RSProject.Data.EF
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "This field is required!")]
         [Display(Name = "Phone Number")]
-        [StringLength(13, ErrorMessage = "13 Character Max!")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Entered phone format is not valid.")]
         public string Phone { get; set; }
 
-        [StringLength(75, ErrorMessage = "75 Character Max!")]
+        [StringLength(256, ErrorMessage = "256 Character Max!")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
-
-        [StringLength(100, ErrorMessage = "100 Character Max!")]
-        public string Address { get; set; }
-
-        [StringLength(100, ErrorMessage = "100 Character Max!")]
-        public string City { get; set; }
-
-        [StringLength(2, ErrorMessage = "2 Character Max!")]
-        public string State { get; set; }
-
-        [Display(Name = "Zip Code")]
-        [StringLength(5, ErrorMessage = "5 Character Max!")]
-        public string ZipCode { get; set; }
+        
     }
 }

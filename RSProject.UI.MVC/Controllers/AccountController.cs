@@ -152,23 +152,26 @@ namespace RSProject.UI.MVC.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                await UserManager.AddToRoleAsync(user.Id, "Customer");
                 if (result.Succeeded)
                 {
-                    #region Dealing with custom user details
+                    
                     UserDetail newUserDeets = new UserDetail();
                     newUserDeets.UserID = user.Id;
                     newUserDeets.FirstName = model.FirstName;
                     newUserDeets.LastName = model.LastName;
+                    newUserDeets.Email = model.Email;
                     newUserDeets.Phone = model.Phone;
 
                     RSEntities db = new RSEntities();
                     db.UserDetails.Add(newUserDeets);
                     db.SaveChanges();
-                    #endregion
 
+                    
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    
+                   await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     ViewBag.Link = callbackUrl;
                     return View("DisplayEmail");
                 }

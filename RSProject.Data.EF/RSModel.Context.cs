@@ -30,5 +30,6 @@ namespace RSProject.Data.EF
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }

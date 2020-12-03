@@ -1,5 +1,7 @@
 ﻿@model RSProject.UI.MVC.Models.IndexViewModel
 @{
+    /**/
+
     ViewBag.Title = "Manage your account";
 }
 
@@ -14,25 +16,37 @@
 
 
                 <br />
+                @if (User.IsInRole("Customer"))
+                {
+                   
+                    <p class="myLinkTwo">
+                        @Html.ActionLink("Modify Your Team", "Index", "CustomerAssets")
+                    </p>
+                }
                 <p class="myLinkTwo">
                     @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword")
-                                                                                                                        : Html.ActionLink("Pick a password", "SetPassword"))
+                                                                                                                                                        : Html.ActionLink("Pick a password", "SetPassword"))
                 </p>
+                @*<p class="myLinkTwo">
+                    <span class="myBody">
+                        Phone Number: @Html.DisplayFor(m => m.Phone)
+                        @if (Model.Phone != null)
+                        {
+                            @Html.ActionLink("Change", "AddPhoneNumber")
+                            @: &nbsp;|&nbsp;
+                            @Html.ActionLink("Remove", "RemovePhoneNumber")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Add", "AddPhoneNumber")
+                        }
+
+                    </span>
+                </p>*@
             </div>
 
         </div>
-        @*Phone Number: @Html.DisplayFor(m => m.Phone)*@
-        @*@if (Model.Phone != null)
-            {
-                @Html.ActionLink("Change", "AddPhoneNumber")
-                @: &nbsp;|&nbsp;
-                @Html.ActionLink("Remove", "RemovePhoneNumber")
-            }
-            else
-            {
-                @Html.ActionLink("Add", "AddPhoneNumber")
-            }
-            ]*@
+
 
     </section>
 </header>
