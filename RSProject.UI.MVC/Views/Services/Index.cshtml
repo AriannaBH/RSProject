@@ -16,7 +16,7 @@
 
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "Services")">Create New Service</a>
+                    <a class="btn btn-xl text-uppercase mb-5 myBtn" href="@Url.Action("Create", "Services")">Create New Service</a>
 
                 }
                 @if (Request.IsAuthenticated && User.IsInRole("Customer"))
@@ -52,7 +52,7 @@
                                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                                 {
                                     <p class="myLinkTwo">
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.ServiceID }) <spam class="mySpam">|</spam>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ServiceID }) <spam class="mySpam myBody">|</spam>
                                         @Html.ActionLink("Delete", "Delete", new { id = item.ServiceID })
                                     </p>
                                 }

@@ -40,7 +40,7 @@
                     @Html.HiddenFor(model => model.AssetPhoto, htmlAttributes: new { @class = "control-label col-md-2 offset-1 myBody" })
 
                     <div class="control-label col-md-2 offset-1 myBody">
-                        Team Photo
+                        Team Logo
                     </div>
 
                     <div class="col-md-10 offset-1 myBody">
@@ -96,7 +96,7 @@
         $(function () {
             $("#joinedDate").datepicker({
                 dateFormat: "mm/dd/yy"
-            });
+            }).datepicker("setDate", "0");
 
            
         });

@@ -23,12 +23,6 @@ namespace RSProject.UI.MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Project()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public ActionResult Contact()
         {
 

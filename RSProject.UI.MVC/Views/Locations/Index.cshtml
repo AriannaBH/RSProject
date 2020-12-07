@@ -13,7 +13,7 @@
                 <h3 class="section-subheading text-muted"></h3>
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "Locations")">Create New Location</a>
+                    <a class="btn btn-xl text-uppercase mb-5 myBtn" href="@Url.Action("Create", "Locations")">Create New Location</a>
 
                 }
                 @if (Request.IsAuthenticated && User.IsInRole("Customer"))
@@ -30,12 +30,6 @@
                 {
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="portfolio-item">
-                            @*<a class="portfolio-link" data-toggle="modal" href="@Url.Action("Index", "Reservation")">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="~/Content/assets/img/portfolio/01-thumbnail.jpg" alt="" />
-                            </a>*@
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">@Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State)</div>
                                 <div class="portfolio-caption-subheading text-muted">@Html.DisplayFor(modelItem => item.LocationName)</div>

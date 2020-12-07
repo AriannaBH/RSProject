@@ -1,73 +1,96 @@
 ﻿@{
-    ViewBag.Title = "About The Owners";
+    ViewBag.Title = "Project Brief";
+    ViewBag.SubTitle = "Reservation System";
 }
 
-@* CHange images on page for each milestone later on with time *@
 
-<!-- About-->
 <header class="myMasthead">
     <section class="page-section" id="about">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase mt-5 text-center">@ViewBag.Title</h2>
-                <h3 class="section-subheading text-muted">Talent Is Nothing Without Dedication</h3>
+                <h3 class="section-subheading text-muted">@ViewBag.SubTitle</h3>
             </div>
             <ul class="timeline">
                 <li>
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="~/Content/assets/img/about/1.jpg" alt="" /></div>
+                    <a href="~/Content/assets/AriannaHarrisonDocumentation.pdf" target="_blank">
+                        <div class="timeline-image">
+                            <h4>
+                                Download
+                                <br />
+                                Documentation
+                                <br />
+                            </h4>
+                        </div>
+                    </a>
                     <div class="timeline-panel">
                         <div class="timeline-heading">
-                            <h4>2009-2011</h4>
-                            <h4 class="subheading">Our Humble Beginnings</h4>
+                            <h4>The</h4>
+                            <h4 class="subheading">Purpose</h4>
                         </div>
-                        <div class="timeline-body"><p class="text-muted">Learning the game of softball and experiencing it at first hand. The Harrison girls, ages 11, 9, and 8 began their journeys as softball players. It was a rough start to an awesome road in becoming familiar with the sport.</p></div>
+                        <div class="timeline-body">
+                            <p class="text-muted">
+                                Kansas City Softball Academy is a secure data-driven ASP.NET MVC application. Its purpose is to allow users or, in this case, coaches to register themselves and create assets or teams. Thusly, this website is a reservation system and clients may reserve a service on a certain date.
+                            </p>
+                        </div>
                     </div>
                 </li>
-                <li class="timeline-inverted">
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="~/Content/assets/img/about/2.jpg" alt="" /></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>2012-2015</h4>
-                            <h4 class="subheading">Competitive Ball</h4>
-                        </div>
-                        <div class="timeline-body"><p class="text-muted">Throughout living in Kansas, the Harrison girls participated on several competitive teams around the state. Practicing and playing through all types of weather that Kansas brought, they pushed through and improved as years passed on.</p></div>
-                    </div>
-                </li>
-                <li>
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="~/Content/assets/img/about/3.jpg" alt="" /></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>2016-2018</h4>
-                            <h4 class="subheading">A Whole New World</h4>
-                        </div>
-                        <div class="timeline-body"><p class="text-muted">From playing ball soley during the spring season to all year long, moving to Texas was a transition the Harrison girls are thankful to have experienced. The level of playing in Texas was greater than in Kansas with more practicing, coaching, and games.</p></div>
-                    </div>
-                </li>
-                <li class="timeline-inverted">
-                    <div class="timeline-image"><img class="rounded-circle img-fluid" src="~/Content/assets/img/about/4.jpg" alt="" /></div>
-                    <div class="timeline-panel">
-                        <div class="timeline-heading">
-                            <h4>2019-2020</h4>
-                            <h4 class="subheading">Open House</h4>
-                        </div>
-                        <div class="timeline-body"><p class="text-muted">After some time being retired from the loving sport of softball, the Harrison girls joined back together and decided to share their love for the sport with their local community. In 2020, KCSA has open doors for any softball teams wanting to dedicate outside hours to become a better all around player for their own careers as softball players.</p></div>
-                    </div>
-                </li>
-
                 <li class="timeline-inverted">
                     <a href="@Url.Action("Register", "Account")">
                         <div class="timeline-image">
                             <h4>
-                                Be Part
+                                Test
                                 <br />
-                                Of Our
+                                Out
                                 <br />
-                                Story!
+                                Registery
+                            </h4>
+                        </div>
+                    </a>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>Test</h4>
+                            <h4 class="subheading">Reservation</h4>
+                        </div>
+                        <div class="timeline-body">
+                            <p class="text-muted">
+                                Feel free to register and test out creating your own team! As well as, booking services at the provided locations. In which, you can view your own reservations. However, please remember this is NOT a real life academy to register an actual team, thank you!
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="@Url.Action("Contact", "Home")">
+                        <div class="timeline-image">
+                            <h4>
+                                Contact
+                                <br />
+                                Developer
+                                <br />
+                            </h4>
+                        </div>
+                    </a>
+                    <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4>Email</h4>
+                            <h4 class="subheading">Arianna</h4>
+                        </div>
+                        <div class="timeline-body"><p class="text-muted">This link shoots you straight to the contact page! Let me know any comments or questions. Or anything you wish to share, I am open to hearing anything on web development. I enjoy the experience I have so far encountered, therefore I am eager to enhance my learning as time passes on.</p></div>
+                    </div>
+                </li>
+                <li class="timeline-inverted">
+                    <a href="http://a-harrison.com/" target="_blank">
+                        <div class="timeline-image">
+                            <h4>
+                                My
+                                <br />
+                                Personal
+                                <br />
+                                Site
                             </h4>
                         </div>
                     </a>
                 </li>
-
             </ul>
         </div>
     </section>

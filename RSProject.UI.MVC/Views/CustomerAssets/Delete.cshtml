@@ -15,23 +15,20 @@
                 </div>
                 <dl class="col-md-10 myBody offset-1 text-center">
 
+                    <dt>
+                        Team Logo
+                    </dt>
+                    <dt>
+                        <img src="~/Content/CustomerAssets/@Model.AssetPhoto" alt="@Model.AssetName" class="img-responsive img-thumbnail" />
+                    </dt>
 
-                    @*@if (Model.AssetPhoto != null)
-                    {
-                        <dt>
-                            Team Photo
-                        </dt>
-                        <dt>
-                            <img src="~/Content/StudentImages/@Model.AssetPhoto" alt="@Model.AssetName" class="img-responsive img-thumbnail" />
-                        </dt>
-                    }*@
-                    @*<dt>
+                    <dt>
                         Comments
                     </dt>
 
                     <dd>
                         @Html.DisplayFor(model => model.SpecialNotes)
-                    </dd>*@
+                    </dd>
 
                     <dt>
                         Is Active

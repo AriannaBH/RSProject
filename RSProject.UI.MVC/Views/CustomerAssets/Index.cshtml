@@ -22,14 +22,14 @@
 
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "CustomerAssets")">
+                    <a class="btn btn-xl text-uppercase mb-5 myBtn" href="@Url.Action("Create", "CustomerAssets")">
                         Create New Asset
                     </a>
                 }
                 
                 @if(Request.IsAuthenticated && User.IsInRole("Customer"))
                 {
-                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "CustomerAssets")">
+                    <a class="btn btn-xl text-uppercase mb-5 myBtn" href="@Url.Action("Create", "CustomerAssets")">
                         Create New Team
                     </a>
                 }

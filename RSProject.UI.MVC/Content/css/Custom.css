@@ -22,9 +22,6 @@
     color: #2508bf;
 }
 
-a:hover {
-    color: gray;
-}
 
 .btn-primary:hover {
     background-color: white;
@@ -34,7 +31,7 @@ a:hover {
 
 .myBtn:hover {
     background-color: #2508bf;
-    border-color: white;
+    border-color: #2508bf;
     color: white;
 }
 
@@ -67,10 +64,6 @@ header.masthead {
     color: #2508bf;
 }
 
-header.masthead {
-    /*color: #2508bf;*/
-}
-
 .dropdown-item.active, .dropdown-item:active, .timeline > li .timeline-image, #portfolio .portfolio-item .portfolio-caption {
     background-color: #2508bf;
 }
@@ -88,7 +81,7 @@ header.masthead {
     }
 
 .body-content {
-    padding-top: 36px; /* choose whatever you want here */
+    padding-top: 36px;
 }
 
 .myContainer {
@@ -125,7 +118,7 @@ h2, h4, .myBody, .text-muted {
     color: white;
 }
 
-    .myLink:hover,  .myActionLink:hover a {
+    .myLink:hover, .myActionLink:hover a {
         color: black;
     }
 
@@ -140,3 +133,23 @@ h2, h4, .myBody, .text-muted {
     .myBtn2 a:hover {
         color: #2508bf;
     }
+
+
+/*a:hover {
+    color: #2508bf;
+    text-decoration: none;
+}*/
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem;
+    color: #2508bf;
+}
+
+.btn:focus, .btn.focus {
+    box-shadow: 0 0 0 0.2rem;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem !important;
+    color: #2508bf;
+}

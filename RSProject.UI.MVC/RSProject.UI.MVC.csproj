@@ -199,7 +199,10 @@
     <Content Include="Content\assets\img\favicon.ico" />
     <Content Include="Content\assets\img\fieldpic.jpg" />
     <Content Include="Content\assets\img\glove.jpg" />
+    <Content Include="Content\assets\img\gloves.jpg" />
     <Content Include="Content\assets\img\header-bg.jpg" />
+    <Content Include="Content\assets\img\helmet.jpeg" />
+    <Content Include="Content\assets\img\helmetspink.jpg" />
     <Content Include="Content\assets\img\heybatter.jpeg" />
     <Content Include="Content\assets\img\homebase.jpg" />
     <Content Include="Content\assets\img\kansasCityLogo.png" />
@@ -226,6 +229,7 @@
     <Content Include="Content\assets\img\softballgirl.jpeg" />
     <Content Include="Content\assets\img\softballMain.jpeg" />
     <Content Include="Content\assets\img\softballPic.jpeg" />
+    <Content Include="Content\assets\img\softballs.jpg" />
     <Content Include="Content\assets\img\team\1.jpg" />
     <Content Include="Content\assets\img\team\2.jpg" />
     <Content Include="Content\assets\img\team\3.jpg" />
@@ -275,6 +279,7 @@
     <Content Include="_Archive\css\styles.css" />
     <Content Include="_Archive\index.html" />
     <Content Include="_Archive\js\scripts.js" />
+    <Content Include="Content\assets\AriannaHarrisonDocumentation.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -359,7 +364,6 @@
     <Content Include="Views\UserDetails\Details.cshtml" />
     <Content Include="Views\UserDetails\Edit.cshtml" />
     <Content Include="Views\UserDetails\Index.cshtml" />
-    <Content Include="Views\Home\Project.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

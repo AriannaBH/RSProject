@@ -12,7 +12,7 @@
                 <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
                 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                 {
-                    <a class="btn btn-primary btn-xl text-uppercase mb-5" href="@Url.Action("Create", "UsersAdmin")">
+                    <a class="btn btn-xl text-uppercase mb-5 myBtn" href="@Url.Action("Create", "UsersAdmin")">
                         Create New User
                     </a>
 

@@ -1,58 +1,46 @@
 ﻿@model RSProject.Data.EF.Reservation
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Reservation Details";
 }
 
-<h2>Details</h2>
+<header class="myMasthead">
+    <section class="page-section" id="portfolio">
+        <div class="container">
 
-<div>
-    <h4>Reservation</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ReservationDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReservationDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReservationTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReservationTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerAsset.AssetName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerAsset.AssetName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location.LocationName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location.LocationName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Service.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Service.Name)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ReservationID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <div class="form-horizontal">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase mt-5">@ViewBag.Title</h2>
+                    <br />
+                    <div class="">
+                        <div class="portfolio-item">
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">@Html.DisplayFor(Model => Model.CustomerAsset.AssetName)</div>
+                                <div class="portfolio-caption-subheading text-muted">@Html.DisplayFor(Model => Model.Service.Name)</div>
+                                <div class="portfolio-caption-subheading text-muted">
+                                    @Html.DisplayFor(Model => Model.ReservationDate)
+                                </div>
+                                <div class="portfolio-caption-subheading text-muted">
+                                    @Html.DisplayFor(Model => Model.Location.City), @Html.DisplayFor(modelItem => Model.Location.State)
+                                </div>
+                                <div class="portfolio-caption-subheading text-muted">
+                                    @Html.DisplayFor(Model => Model.ReservationTime)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <br />
+            </div>
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+            <p class="myLinkTwo text-center">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ReservationID }) <span class="myBody">|</span>
+                @Html.ActionLink("Back to List", "Index") 
+            </p>
+            }
+        </div>
+    </section>
+</header>

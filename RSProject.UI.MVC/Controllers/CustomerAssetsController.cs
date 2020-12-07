@@ -60,7 +60,7 @@ namespace RSProject.UI.MVC.Controllers
             if (User.IsInRole("Customer"))
             {
                 string currentUser = User.Identity.GetUserId();
-                ViewBag.OwnerID = new SelectList(db.CustomerAssets.Where(o => o.OwnerID == currentUser), "UserID", "FullName");
+                ViewBag.OwnerID = new SelectList(db.UserDetails.Where(o => o.AspNetUser.Id == currentUser), "UserID", "FullName");
                 return View();
             }
             else

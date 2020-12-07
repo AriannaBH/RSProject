@@ -8,16 +8,18 @@
 <header class="myMasthead">
     <section class="page-section">
         <div class="container">
-            @if(ViewBag.LimitFull != null)
+            @if (ViewBag.LimitHit != null)
             {
-                <h2 class="section-heading text-uppercase mt-5 text-danger">
-                    @ViewBag.LimitFull
+
+                <h2 class="section-heading text-uppercase mt-5 text-center" style="background-color: red">
+                    @ViewBag.LimitHit
                 </h2>
             }
 
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
+
 
                 <div class="form-horizontal">
                     <div class="text-center">
@@ -59,12 +61,12 @@
                     </div>
 
                     <div class="form-group">
-                    @Html.LabelFor(model => model.ReservationTime, "Reservation Time", htmlAttributes: new { @class = "control-label col-md-2 offset-1 myBody" })
-                    <div class="col-md-10 offset-1">
-                        @Html.EditorFor(model => model.ReservationTime, new { htmlAttributes = new { @class = "form-control timePicker", @autocomplete = "off", @type = "text" } })
-                        @Html.ValidationMessageFor(model => model.ReservationTime, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.ReservationTime, "Reservation Time", htmlAttributes: new { @class = "control-label col-md-2 offset-1 myBody" })
+                        <div class="col-md-10 offset-1">
+                            @Html.EditorFor(model => model.ReservationTime, new { htmlAttributes = new { @class = "form-control timePicker", @autocomplete = "off", @type = "text" } })
+                            @Html.ValidationMessageFor(model => model.ReservationTime, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
                     <div class="form-group">
                         <div class="col-md-10 offset-1 text-center">
@@ -73,7 +75,6 @@
                     </div>
                 </div>
             }
-
             <div class="myLinkTwo offset-1">
                 @Html.ActionLink("Back to List", "Index")
             </div>
@@ -86,12 +87,11 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-
     <script>
         $(function () {
             $("#reservedDate").datepicker({
                 dateFormat: "mm/dd/yy"
-            });
+            }).datepicker("setDate", "0");
 
             $('.timePicker').timepicker({
                 timeFormat: 'h:mm p',

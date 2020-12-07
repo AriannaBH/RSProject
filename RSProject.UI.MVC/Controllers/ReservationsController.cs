@@ -27,9 +27,31 @@ namespace RSProject.UI.MVC.Controllers
             }
             else
             {
+                if (User.IsInRole("Admin"))
+                {
+                    var reservations = db.Reservations.Include(r => r.CustomerAsset).Include(r => r.Location).Include(r => r.Service).OrderBy(o => o.Location.City);
+                    return View(reservations.ToList());
+                }
+                else
+                {
+                    if (User.IsInRole("Employee"))
+                    {
+                        var reservations = db.Reservations.Include(r => r.CustomerAsset).Include(r => r.Location).Include(r => r.Service).Where(w => w.ReservationDate == DateTime.Today).OrderBy(o => o.Location.City);
+                        return View(reservations.ToList());
 
-                var reservations = db.Reservations.Include(r => r.CustomerAsset).Include(r => r.Location).Include(r => r.Service);
-                return View(reservations.ToList());
+                    }
+                    else
+                    {
+                        var reservations = db.Reservations.Include(r => r.CustomerAsset).Include(r => r.Location).Include(r => r.Service).OrderBy(o => o.Location.City);
+                        var todayRes = db.Reservations.Where(w => w.ReservationDate == DateTime.Today);
+                        if (todayRes == null)
+                        {
+                            ViewBag.NoRes = $"No reservations booked.";
+                        }
+
+                        return View(reservations);
+                    }
+                }
             }
         }
 
@@ -61,6 +83,7 @@ namespace RSProject.UI.MVC.Controllers
                 ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "City");
                 ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");
 
+
                 return View();
             }
             else
@@ -68,7 +91,7 @@ namespace RSProject.UI.MVC.Controllers
 
 
                 ViewBag.CustomerAssetID = new SelectList(db.CustomerAssets, "CustomerAssetID", "AssetName");
-                ViewBag.LocationID = new SelectList(db.Locations.OrderBy(o => o.LocationName), "LocationID", "City");
+                ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "City");
                 ViewBag.ServiceID = new SelectList(db.Services, "ServiceID", "Name");
 
                 return View();
@@ -100,8 +123,7 @@ namespace RSProject.UI.MVC.Controllers
                     }
                     else
                     {
-                        ViewBag.LimitFull = $"Sorry reservation full, please choose another date or location!";
-                        // return View(reservation);
+                        ViewBag.LimitHit = $"Sorry reservation full, please choose another date or location!";
                     }
                 }
                 else
